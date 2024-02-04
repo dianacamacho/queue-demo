@@ -29,7 +29,9 @@ gem "cssbundling-rails"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
 
-gem "sidekiq", "~> 7.2"
+gem "solid_queue", "~> 0.2.1"
+
+gem "mission_control-jobs"
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
