@@ -63,6 +63,21 @@ Rails.application.configure do
   config.active_job.queue_adapter = :solid_queue
   # config.active_job.queue_name_prefix = "queue_demo_production"
 
+  # Mailer settings
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address: "smtp.sendgrid.net"
+    port: 587,
+    domain: ENV["HEROKU_APP_DEFAULT_DOMAIN_NAME"],
+    authentication: "plain",
+    enable_starttls_auto: true,
+    user_name: ENV["SENDGRID_USERNAME"],
+    password: ENV["SENDGRID_PASSWORD"],
+  }
+  config.action_mailer.default_url_options = {host: ENV["HEROKU_APP_DEFAULT_DOMAIN_NAME"]}
+  config.action_mailer.asset_host = "https://#{ENV["HEROKU_APP_DEFAULT_DOMAIN_NAME"]}"
+  config.action_mailer.perform_deliveries = true
+
   config.action_mailer.perform_caching = false
 
   # Ignore bad email addresses and do not raise email delivery errors.
