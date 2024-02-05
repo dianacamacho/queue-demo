@@ -20,8 +20,13 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
 development:
-  <<: *default
-  database: queue_demo_development
+  primary:
+    <<: *default
+    database: queue_demo_development
+  solid_queue:
+    <<: *default
+    database: queue_demo_solid_queue_development
+    migrations_paths: db/solid_queue_migrate
 
   # The specified database role being used to connect to PostgreSQL.
   # To create additional roles in PostgreSQL see `$ createuser --help`.
@@ -54,8 +59,13 @@ development:
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
-  <<: *default
-  database: queue_demo_test
+  primary:
+    <<: *default
+    database: queue_demo_test
+  solid_queue:
+    <<: *default
+    database: queue_demo_solid_queue_test
+    migrations_paths: db/solid_queue_migrate
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -79,6 +89,9 @@ test:
 #
 production:
   <<: *default
-  database: queue_demo_production
-  username: queue_demo
-  password: <%= ENV["QUEUE_DEMO_DATABASE_PASSWORD"] %>
+  primary:
+    <<: *default
+  solid_queue:
+    <<: *default
+    url:
+    migrations_paths: db/solid_queue_migrate
