@@ -6,29 +6,28 @@ default: &default
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
+solid_queue: &solid_queue
+  <<: *default
+  migrations_paths: db/solid_queue_migrate
+
 development:
   primary:
     <<: *default
     database: queue_demo_development
   solid_queue:
-    <<: *default
+    <<: *solid_queue
     database: queue_demo_solid_queue_development
-    migrations_paths: db/solid_queue_migrate
 
 test:
   primary:
     <<: *default
     database: queue_demo_test
-  solid_queue:
-    <<: *default
-    database: queue_demo_solid_queue_test
-    migrations_paths: db/solid_queue_migrate
 
 production:
   <<: *default
   primary:
     <<: *default
   solid_queue:
-    <<: *default
+    <<: *solid_queue
     url: <%= ENV["SOLID_QUEUE_DATABASE_URL"] %>
     migrations_paths: db/solid_queue_migrate

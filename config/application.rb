@@ -40,5 +40,6 @@ module QueueDemo
     config.generators.system_tests = nil
 
     config.active_job.queue_adapter = :solid_queue
+    config.solid_queue.connects_to = { database: { writing: :solid_queue, reading: :solid_queue } }
   end
 end
