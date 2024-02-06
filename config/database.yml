@@ -24,7 +24,6 @@ test:
     database: queue_demo_test
 
 production:
-  <<: *default
   primary:
     <<: *default
   solid_queue:
