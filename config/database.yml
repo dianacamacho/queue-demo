@@ -29,4 +29,3 @@ production:
   solid_queue:
     <<: *solid_queue
     url: <%= ENV["SOLID_QUEUE_DATABASE_URL"] %>
-    migrations_paths: db/solid_queue_migrate
